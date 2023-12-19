@@ -33,15 +33,14 @@ function differenceMaxMinWorker(...arr) {
     let min = Infinity;
     let max = -Infinity;
     let sum = 0;
-    for (let i = 0; i < arr.length; i++) {
-      if (arr.length <= 0) {
+    if (arr.length <= 0) {
       return 0;
-      } else {
+      } 
+    for (let i = 0; i < arr.length; i++) {
       min = Math.min(min, arr[i])
       max = Math.max(max, arr[i])
       sum += arr[i];
       }
-    }
   return max - min;
 }
 
@@ -92,19 +91,19 @@ console.log(averageEvenElementsWorker(15, 97, 85, 64, 67, 10, 69, 40, 15, 35))
 
 // Задача 3 "Функции"
 function makeWork (arrOfArr, func) {
-  maxWorkerResult = -Infinity;
+  let maxWorkerResult = -Infinity;
   
   for (let i = 0; i < arr.length; i++) { 
+   // maxWorkerResult = Math.max(maxWorkerResult, arr[i][i]);
+    maxWorkerResult = Math.max(...arr);
+    const resultMakeWork = [...arr];
+    return resultMakeWork;
 
-  }
-
-  const resultMakeWork = 
-  return resultMakeWork;
-
-  if (resultMakeWork > maxWorkerResult) {
-
-
-  }
+    if (resultMakeWork > maxWorkerResult) {
+    maxWorkerResult = resultMakeWork;
+    }
+    }
+  return maxWorkerResult;
 }
 
 
