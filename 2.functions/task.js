@@ -110,6 +110,9 @@ function averageEvenElementsWorker(...arr) {
    return sumEvenElement / countEvenElement;
 }
 
+/* 2 способ
+*/
+
 
 // summElementsWorker
 console.log(summElementsWorker());
