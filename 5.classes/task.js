@@ -172,20 +172,7 @@ addMarks() {
 }
 
 getAverage() {
-  if(this.hasOwnProperty("marks") && this.marks.length !== 0) {
-    let sum = 0;
-   
-    for (let i = 0; i < this.marks.length; i++){
-      sum += this.marks[i];
-    } 
-      
-    let avg = sum / this.marks.length;
-    return avg;
-    
-  } else {
-    return 0;
-  }
-}
+
 }*/
 
 
