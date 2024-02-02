@@ -19,13 +19,6 @@ function getArrayParams(...arr) {
     };
 }
 
-/* 2 способ
-return {
-    min: Math.min(...arr), 
-    max: Math.max(...arr), 
-    avg: Number ((arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0) / arr.length).toFixed(2)); 
-}*/
-
 console.log(getArrayParams(-99, 99, 10));
 console.log(getArrayParams(1, 2, 3, -100, 10));  
 console.log(getArrayParams(5));
@@ -41,10 +34,6 @@ function summElementsWorker(...arr) {
       return sum;
     }
 }
-
-/* 2 способ
-  return arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);*/
-
 
 function differenceMaxMinWorker(...arr) {
       let min = Infinity;
@@ -63,10 +52,6 @@ function differenceMaxMinWorker(...arr) {
   
       return max - min;
 }
-
-/* 2 способ
-  return arr.length > 0 ? Math.max(...arr) - Math.min(...arr) : 0;*/
-
 
 function differenceEvenOddWorker(...arr) {
     let sumEvenElement = 0;
@@ -87,10 +72,6 @@ function differenceEvenOddWorker(...arr) {
     return sumEvenElement - sumOddElement;
 }
 
-/* 2 способ
-  
-  
-  аккумулятор - это объект, т.к. надо 2 значения получать*/
 
 function averageEvenElementsWorker(...arr) {
     sumEvenElement = 0;
