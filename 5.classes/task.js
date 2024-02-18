@@ -27,7 +27,6 @@ class PrintEditionItem {
 	get state() {
 		return this._state;
 	}
-
 }
 
 
@@ -105,14 +104,12 @@ class Library {
 	}
 
 	giveBookByName(bookName) {
-		const foundBookIndex = this.books.findIndex(item => item.name === bookName);
-
-		if(foundBookIndex === -1) {
-			return null;
-		};
-
-		this.books.splice(foundBookIndex, 1)
-	}
+    const book = this.findBookBy("name", bookName);
+    if (book) {
+      this.books.splice(this.books.indexOf(book), 1);
+    }
+    return book;
+  	}
 }
 
 	Library.prototype.addBook = function(book) {
@@ -143,39 +140,41 @@ console.log("Количество книг после выдачи: " + library.
 class Student {
 	constructor(name) {
   	this.name = name;
-  	this.marks = [{subject: []}];
+  	this.marks = {};
 }
 
-addMarks() {
-  if(this.hasOwnProperty("marks[1]") && this.marks[1] >= 2 && this.marks[1] <= 5) {
-    this.marks[1].push(...marks[1]);
+	addMark(mark, subject) {
+    if (mark > 5 || mark < 2) {
+      return;
+    } else {
+      if (!this.marks[subject]) {
+        this.marks[subject] = [];
+      }
+      return this.marks[subject].push(mark);
+    }
   }
-  if(marks.subject in Student) {
-    
+
+  getAverageBySubject(subject) {
+    if (!this.marks[subject]) {
+      return 0;
+    } else {
+      return (this.marks[subject].reduce((accumulator, item) => accumulator + item, 0) / this.marks[subject].length);
+    }
+  }
+
+  getAverage() {
+    const subjects = Object.keys(this.marks);
+    if (subjects.length === 0) {
+      return 0;
+    } else {
+      let summMarks = 0;
+      subjects.forEach((subject) => {
+        summMarks += this.getAverageBySubject(subject);
+      });
+    return summMarks / subjects.length;
+    }
   }
 }
-
-/*getAverageBySubject() {
-  if(this.hasOwnProperty("marks") && this.marks.length !== 0) {
-    let sum = 0;
-   
-    for (let i = 0; i < this.marks.length; i++){
-      sum += this.marks[1][i];
-    } 
-      
-    let avg = sum / this.marks.length;
-    return avg;
-    
-  } else {
-    return 0;
-  }
-}
-
-getAverage() {
-
-}*/
-
-
 
 
 let student1 = new Student("Василиса");
@@ -186,9 +185,9 @@ student1.addMark(5, "химия");
 student1.addMark(5, "физика");
 student1.addMark(4, "физика");
 student1.addMark(6, "физика"); // Оценка не добавится, так как больше 5
-student1.getAverageBySubject("физика"); // Средний балл по предмету физика 4.5
-student1.getAverageBySubject("биология"); // Вернёт 0, так как по такому предмету нет никаких оценок.
-student1.getAverage(); // Средний балл по всем предметам 4.75
+console.log(student1.getAverageBySubject("физика")); // Средний балл по предмету физика 4.5
+console.log(student1.getAverageBySubject("биология")); // Вернёт 0, так как по такому предмету нет никаких оценок.
+console.log(student1.getAverage()); // Средний балл по всем предметам 4.75
 
 
 student2.addMark(5, "химия");
@@ -196,5 +195,5 @@ student2.addMark(5, "химия");
 student2.addMark(5, "физика");
 student2.addMark(7, "физика"); // Оценка не добавится, так как больше 5
 student2.getAverageBySubject("физика"); 
-student2.getAverageBySubject("биология"); // Вернёт 0, так как по такому предмету нет никаких оценок.
-student2.getAverage(); 
+console.log(student2.getAverageBySubject("биология")); // Вернёт 0, так как по такому предмету нет никаких оценок.
+console.log(student2.getAverage()); 
