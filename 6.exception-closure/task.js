@@ -11,9 +11,12 @@ function validateCount(value) {
     try {
         return parseCount(value);
     } catch (error) {
+    	console.log(error);
         return error;
     }
 }
+
+console.log(validateCount(55));
 
 
 
@@ -21,16 +24,14 @@ function validateCount(value) {
 
 class Triangle {
 	constructor(a, b, c) {
+		if((a + b) < c || (b + c) < a || (a + c) < b) {
+			throw new Error("Треугольник с такими сторонами не существует");
+		}
+
 		this.a = a;
 		this.b = b;
 		this.c = c;
 	} 
-
-	rulerTriangle() {
-		if((a + b) < c || (b + c) < a || (a + c) < b) {
-			throw new Error("Треугольник с такими сторонами не существует");
-		}
-	}
 
 	get perimeter() {
 		return this.a + this.b + this.c;
@@ -44,9 +45,20 @@ class Triangle {
 
 function getTriangle(a, b, c) {
     try {
-        return Triangle;
+        return new Triangle(a, b, c);
     } catch (error) {
-        return error;
+    	console.error(error);
+        return {
+        	get perimeter() {
+				return "Ошибка расчета периметра: треугольник не существует";
+		},
+
+			get area() {
+				return "Ошибка расчета площади: треугольник не существует";
+			}
+        };
     }
 } 
 
+
+console.log(getTriangle(3, 2, 5));
