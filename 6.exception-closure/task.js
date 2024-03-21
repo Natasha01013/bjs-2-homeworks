@@ -1,11 +1,12 @@
 ﻿// задача 1. Форматтер чисел
 
 function parseCount(value) {
-      if(value === NaN) {
+      if(!Number.isNaN(value)) {
         throw new Error("Невалидное значение");
-      }
+      } else {
     return Number.parseFloat(value); 
-  }
+	}
+}
 
 function validateCount(value) {
     try {
