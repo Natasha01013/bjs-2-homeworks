@@ -48,13 +48,13 @@ function getTriangle(a, b, c) {
         return new Triangle(a, b, c);
     } catch (error) {
     	console.error(error);
-        return object.freeze() {
+        return {
         	get perimeter() {
-				return "Ошибка расчета периметра: треугольник не существует";
+				return "Ошибка! треугольник не существует";
 		},
 
 			get area() {
-				return "Ошибка расчета площади: треугольник не существует";
+				return "Ошибка! треугольник не существует";
 			}
         };
     }
