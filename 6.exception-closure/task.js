@@ -1,7 +1,7 @@
 ﻿// задача 1. Форматтер чисел
 
 function parseCount(value) {
-      if(!Number.isNaN(value)) {
+      if(isNaN(value)) {
         throw new Error("Невалидное значение");
       } else {
     return Number.parseFloat(value); 
@@ -12,13 +12,12 @@ function validateCount(value) {
     try {
         return parseCount(value);
     } catch (error) {
-    	console.log(error);
         return error;
     }
 }
 
 console.log(validateCount(55));
-
+console.log(validateCount('dsdf'));
 
 
 //Задача 2. Треугольник
