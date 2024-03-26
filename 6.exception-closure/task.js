@@ -50,11 +50,11 @@ function getTriangle(a, b, c) {
     	console.error(error);
         return {
         	get perimeter() {
-				return "Ошибка! треугольник не существует";
+				return "Ошибка! Треугольник не существует";
 		},
 
 			get area() {
-				return "Ошибка! треугольник не существует";
+				return "Ошибка! Треугольник не существует";
 			}
         };
     }
