@@ -38,7 +38,7 @@ class Triangle {
 	} 
 
 	get area() {
-		let p = 1 / 2 * (this.a + this.b + this.c);
+		let p = 1 / 2 * this.perimeter;
 		return +(Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(3));
 	}
 }
@@ -48,7 +48,7 @@ function getTriangle(a, b, c) {
         return new Triangle(a, b, c);
     } catch (error) {
     	console.error(error);
-        return {
+        return object.freeze() {
         	get perimeter() {
 				return "Ошибка расчета периметра: треугольник не существует";
 		},
