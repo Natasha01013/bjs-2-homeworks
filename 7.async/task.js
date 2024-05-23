@@ -74,6 +74,7 @@ class AlarmClock {
 		this.alarmCollection.forEach(item => {
 			item.canCall = true;
 	});
+	}
 
 	//удаляет все звонки
 	clearAlarms(){
@@ -81,3 +82,19 @@ class AlarmClock {
 		this.alarmCollection = [];
 	}
 }
+
+
+const alarmClockLullaby = new AlarmClock();
+
+// функция callback
+function ringBell(message) {
+	console.log('Пора вставать')
+}
+
+//добавление будильника на определенное время
+alarmClockLullaby.addClock('06:30', () => ringBell('первый будильник'));
+alarmClockLullaby.addClock('06:45', () => ringBell('второй будильник'));
+alarmClockLullaby.addClock('07:00', () => ringBell('теперь точно пора вставать'));
+
+//запуск всех звонков
+alarmClockLullaby.start();
