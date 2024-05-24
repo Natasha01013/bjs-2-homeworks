@@ -51,16 +51,16 @@ class AlarmClock {
 	start(){
 		if(this.intervalId != undefined) {
 			return;
-		} else {
-			this.intervalId = setInterval(() => {
-				this.alarmCollection.forEach((item) => {
-					if ((this.getCurrentFormattedTime() == item.time) && item.canCall == true) {
-						item.canCall = false;
-						item.callback();
-					} 
-				});
-			}, 1000);
-		}
+		} 
+
+		this.intervalId = setInterval(() => {
+			this.alarmCollection.forEach((item) => {
+				if ((this.getCurrentFormattedTime() == item.time) && item.canCall == true) {
+					item.canCall = false;
+					item.callback();
+				} 
+			});
+		}, 1000);
 	}
 
 	//останавливает выполнение интервала будильника
