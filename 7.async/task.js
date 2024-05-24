@@ -6,11 +6,11 @@ class AlarmClock {
 
 	//добавляет новый звонок в коллекцию существующих
 	addClock(time, callback){
-		if (time === undefined || callback === undefined) {
+		if (time == undefined || callback == undefined) {
 			throw new Error('Отсутствуют обязательные аргументы');
 		} 
 
-		const sameTime = this.alarmCollection.find(item => item.time === time);
+		const sameTime = this.alarmCollection.find(item => item.time === time); 
 		if(sameTime) {
 			console.warn('Уже присутствует звонок на это же время');
 		}
@@ -18,12 +18,12 @@ class AlarmClock {
 		this.alarmCollection.push({
 			callback: callback,
 			time: time,
-			canCall: true
+			canCall: true  //звонок может быть выполнен
 		});
 	}
 
 	
-	//удаляет звонки по определённому времени
+	//удаляет звонки по определённому времени, которые повтояряются
 	removeClock(time){
 		this.alarmCollection = this.alarmCollection.filter(item => {
 			return item.time !== time;
@@ -33,33 +33,33 @@ class AlarmClock {
 	
 	//возвращает текущее время в строковом формате HH:MM
 	getCurrentFormattedTime(){
-		let currentTime = new Date();
-		let hour = currentTime.getHours(); 
-		let minute = currentTime.getMinutes();
+		const currentTime = new Date();   
+		let hours = currentTime.getHours(); 
+		let minutes = currentTime.getMinutes();
 
-		if(hour < 10) {
-			hour = '0' + hour;
+		if(hours < 10) {
+			hours = '0' + hours;
 		}	
-		if(minute < 10) {
-			minute = '0' + minute;
+		if(minutes < 10) {
+			minutes = '0' + minutes;
 		}
 
-		return hour + minute;
+		return hours + ':' + minutes;
 	}
 
 	//запускает будильник
 	start(){
-		if(this.intervalId !== undefined) {
-			return
+		if(this.intervalId != undefined) {
+			return;
 		} else {
 			this.intervalId = setInterval(() => {
 				this.alarmCollection.forEach((item) => {
-					if ((this.getCurrentFormattedTime() = item.time) && item.canCall) {
+					if ((this.getCurrentFormattedTime() == item.time) && item.canCall == true) {
 						item.canCall = false;
 						item.callback();
 					} 
 				});
-			}, 5000);
+			}, 1000);
 		}
 	}
 
@@ -84,17 +84,23 @@ class AlarmClock {
 }
 
 
+
 const alarmClockLullaby = new AlarmClock();
 
 // функция callback
 function ringBell(message) {
-	console.log('Пора вставать')
+	console.log('Вставай, ' + message);
 }
 
 //добавление будильника на определенное время
 alarmClockLullaby.addClock('06:30', () => ringBell('первый будильник'));
 alarmClockLullaby.addClock('06:45', () => ringBell('второй будильник'));
-alarmClockLullaby.addClock('07:00', () => ringBell('теперь точно пора вставать'));
+alarmClockLullaby.addClock('07:00', () => ringBell('ну уже точно пора вставать'));
+
+console.log('alarmClockLullaby', alarmClockLullaby);
 
 //запуск всех звонков
 alarmClockLullaby.start();
+
+//остановка всех звонков
+//alarmClockLullaby.stop();
